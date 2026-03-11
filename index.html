@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nayyab Gul — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg: #faf8f5; --bg2: #f2ede6; --ink: #1a1a1a;
+      --accent: #2563eb; --accent2: #1d4ed8;
+      --muted: #6b7280; --border: #e5e0d8; --card: #ffffff;
+      --tag-bg: #eff6ff; --tag-c: #2563eb;
+    }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--ink); font-family: 'Outfit', sans-serif; font-weight: 300; line-height: 1.6; }
+
+    /* NAV */
+    nav {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 5rem; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; background: rgba(250,248,245,0.95);
+      backdrop-filter: blur(16px); z-index: 100;
+    }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 700; color: var(--ink); text-decoration: none; }
+    .nav-logo span { color: var(--accent); }
+    nav ul { list-style: none; display: flex; gap: 2.5rem; align-items: center; }
+    nav ul a { text-decoration: none; color: var(--muted); font-size: 0.82rem; letter-spacing: 1.2px; text-transform: uppercase; font-weight: 500; transition: color 0.2s; }
+    nav ul a:hover { color: var(--accent); }
+    .nav-cta { background: var(--accent) !important; color: #fff !important; padding: 0.5rem 1.3rem; border-radius: 6px; transition: background 0.2s !important; }
+    .nav-cta:hover { background: var(--accent2) !important; }
+
+    /* HERO */
+    .hero {
+      display: grid; grid-template-columns: 1.1fr 0.9fr;
+      min-height: 88vh; align-items: center; padding: 0 5rem; gap: 5rem;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -100px; right: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(37,99,235,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-text { animation: fadeUp 0.8s ease both; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: var(--tag-bg); color: var(--accent); border: 1px solid #bfdbfe;
+      font-size: 0.75rem; font-weight: 500; padding: 0.35rem 1rem;
+      border-radius: 999px; margin-bottom: 1.5rem;
+    }
+    .hero-badge::before {
+      content: ''; display: inline-block; width: 7px; height: 7px;
+      background: var(--accent); border-radius: 50%;
+      animation: pulse 2s infinite; flex-shrink: 0;
+    }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(3.2rem, 6vw, 5.5rem); line-height: 1.0; font-weight: 700; letter-spacing: -2px; margin-bottom: 0.3rem; }
+    .hero h1 .last { color: var(--accent); font-style: italic; }
+    .hero-role { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--muted); font-style: italic; margin-bottom: 1.5rem; }
+    .hero-desc { color: var(--muted); max-width: 420px; font-size: 0.95rem; line-height: 1.8; margin-bottom: 1.8rem; }
+    .hero-info { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 2rem; }
+    .hero-info span { font-size: 0.82rem; color: var(--muted); display: flex; align-items: center; gap: 0.5rem; }
+    .hero-info span strong { color: var(--ink); font-weight: 500; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary { background: var(--accent); color: #fff; padding: 0.9rem 2.2rem; border-radius: 8px; text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: background 0.2s, transform 0.2s, box-shadow 0.2s; }
+    .btn-primary:hover { background: var(--accent2); transform: translateY(-3px); box-shadow: 0 12px 30px rgba(37,99,235,0.25); }
+    .btn-outline { border: 1.5px solid var(--border); color: var(--ink); padding: 0.9rem 2.2rem; border-radius: 8px; text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: border-color 0.2s, transform 0.2s, color 0.2s; }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-3px); }
+
+    /* AVATAR */
+    .hero-visual { display: flex; justify-content: center; align-items: center; animation: fadeUp 0.8s 0.15s ease both; }
+    .avatar-wrap { position: relative; width: 360px; height: 360px; }
+    .avatar-circle {
+      width: 100%; height: 100%;
+      border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%;
+      background: linear-gradient(135deg, var(--bg2) 0%, #ddd6cc 100%);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif; font-size: 6rem; font-weight: 700;
+      color: var(--accent); letter-spacing: -4px; font-style: italic;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.08); position: relative; z-index: 2;
+    }
+    .avatar-ring1 { position: absolute; inset: -16px; border-radius: inherit; border: 1.5px dashed #bfdbfe; animation: spin 25s linear infinite; }
+    .avatar-ring2 { position: absolute; inset: -32px; border-radius: 50%; border: 1px solid var(--border); animation: spin 40s linear infinite reverse; }
+    .avatar-dot { position: absolute; width: 12px; height: 12px; background: var(--accent); border-radius: 50%; top: 10px; right: 20px; z-index: 3; box-shadow: 0 0 0 4px rgba(37,99,235,0.15); animation: pulse 2s infinite; }
+
+    /* STATS */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--ink); }
+    .stat { padding: 2.5rem 2rem; border-right: 1px solid #2a2a2a; text-align: center; }
+    .stat:last-child { border-right: none; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 700; color: #fff; display: block; line-height: 1; }
+    .stat-num span { color: #60a5fa; }
+    .stat-label { font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: #666; margin-top: 0.4rem; }
+
+    /* ABOUT */
+    .about-wrap { background: var(--bg2); padding: 6rem 5rem; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; max-width: 1100px; margin: 0 auto; }
+    .section-eyebrow { font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 0.8rem; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 700; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 1.5rem; }
+    .section-title em { color: var(--accent); font-style: italic; }
+    .about-text p { color: var(--muted); font-size: 0.95rem; line-height: 1.85; margin-bottom: 1rem; }
+    .about-text p strong { color: var(--ink); font-weight: 600; }
+    .about-details { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .detail-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 1.2rem; }
+    .detail-label { font-size: 0.7rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 0.3rem; }
+    .detail-value { font-size: 0.88rem; font-weight: 500; color: var(--ink); }
+
+    /* SKILLS */
+    .section { padding: 6rem 5rem; max-width: 1200px; margin: 0 auto; }
+    .section-header { margin-bottom: 3rem; }
+    .skills-categories { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .skill-category { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s; }
+    .skill-category:hover { border-color: var(--accent); transform: translateY(-5px); box-shadow: 0 16px 40px rgba(37,99,235,0.08); }
+    .skill-cat-icon { font-size: 2rem; margin-bottom: 1rem; }
+    .skill-cat-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 700; margin-bottom: 1.2rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-tag { background: var(--tag-bg); color: var(--tag-c); border: 1px solid #bfdbfe; font-size: 0.75rem; font-weight: 500; padding: 0.3rem 0.8rem; border-radius: 999px; }
+    .skill-tag.green { background: #f0fdf4; color: #16a34a; border-color: #bbf7d0; }
+    .skill-tag.orange { background: #fff7ed; color: #ea580c; border-color: #fed7aa; }
+    .skill-tag.purple { background: #faf5ff; color: #9333ea; border-color: #e9d5ff; }
+
+    /* PROJECTS */
+    .projects-bg { background: var(--bg2); }
+    .projects-inner { padding: 6rem 5rem; max-width: 1200px; margin: 0 auto; }
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .project-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s; }
+    .project-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,0,0,0.1); border-color: var(--accent); }
+    .project-card.wide { grid-column: span 2; }
+    .project-thumb { height: 200px; display: flex; align-items: center; justify-content: center; font-size: 3.5rem; position: relative; }
+    .thumb-web    { background: linear-gradient(135deg, #fef3c7, #fde68a); }
+    .thumb-android{ background: linear-gradient(135deg, #e0f2fe, #bae6fd); }
+    .thumb-cpp    { background: linear-gradient(135deg, #f0fdf4, #bbf7d0); }
+    .thumb-calc   { background: linear-gradient(135deg, #fce7f3, #fbcfe8); }
+    .project-platform { position: absolute; top: 1rem; right: 1rem; background: rgba(255,255,255,0.92); border-radius: 6px; padding: 0.2rem 0.7rem; font-size: 0.68rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--ink); }
+    .project-body { padding: 1.8rem; }
+    .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.8rem; }
+    .project-tag-item { font-size: 0.68rem; font-weight: 600; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); background: var(--tag-bg); padding: 0.2rem 0.6rem; border-radius: 4px; }
+    .project-title { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 700; margin-bottom: 0.6rem; color: var(--ink); }
+    .project-desc { color: var(--muted); font-size: 0.875rem; line-height: 1.7; margin-bottom: 1.2rem; }
+    .project-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tech-pill { background: var(--bg2); border: 1px solid var(--border); color: var(--muted); font-size: 0.72rem; font-weight: 500; padding: 0.2rem 0.7rem; border-radius: 999px; }
+
+    /* CONTACT */
+    .contact-wrap { background: var(--ink); color: #fff; padding: 7rem 5rem; text-align: center; position: relative; overflow: hidden; }
+    .contact-wrap::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 600px; background: radial-gradient(circle, rgba(37,99,235,0.15) 0%, transparent 70%); pointer-events: none; }
+    .contact-wrap .section-eyebrow { color: #60a5fa; }
+    .contact-wrap h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 700; letter-spacing: -2px; margin-bottom: 1rem; line-height: 1.1; position: relative; }
+    .contact-wrap h2 em { color: #60a5fa; font-style: italic; }
+    .contact-wrap > p { color: #9ca3af; margin-bottom: 2.5rem; font-size: 1rem; max-width: 420px; margin-inline: auto; position: relative; }
+
+    /* SOCIAL BUTTONS */
+    .social-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; }
+    .social-btn {
+      display: inline-flex; align-items: center; gap: 0.6rem;
+      padding: 0.9rem 2rem; border-radius: 8px;
+      text-decoration: none; font-weight: 600; font-size: 0.9rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .social-btn:hover { transform: translateY(-3px); }
+    .btn-github { background: #fff; color: #1a1a1a; }
+    .btn-github:hover { box-shadow: 0 12px 30px rgba(255,255,255,0.2); }
+    .btn-linkedin { background: #0077b5; color: #fff; }
+    .btn-linkedin:hover { box-shadow: 0 12px 30px rgba(0,119,181,0.4); background: #006399; }
+    .social-btn svg { width: 20px; height: 20px; }
+
+    /* FOOTER */
+    footer { display: flex; justify-content: space-between; align-items: center; padding: 2rem 5rem; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); background: var(--bg); }
+    footer a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--accent); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      nav, .hero, .about-wrap, .section, .projects-inner, .contact-wrap, footer { padding-left: 2.5rem; padding-right: 2.5rem; }
+      .skills-categories { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      nav ul { display: none; }
+      .hero { grid-template-columns: 1fr; padding: 4rem 1.5rem; min-height: auto; text-align: center; gap: 3rem; }
+      .hero-desc, .hero-info { margin-inline: auto; text-align: left; }
+      .hero-btns { justify-content: center; }
+      .hero-visual { order: -1; }
+      .avatar-wrap { width: 240px; height: 240px; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .stat { border-bottom: 1px solid #2a2a2a; }
+      .about-wrap { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .section { padding: 4rem 1.5rem; }
+      .skills-categories { grid-template-columns: 1fr; }
+      .projects-inner { padding: 4rem 1.5rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .project-card.wide { grid-column: span 1; }
+      .contact-wrap { padding: 4rem 1.5rem; }
+      footer { flex-direction: column; gap: 1rem; padding: 1.5rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <a href="#home" class="nav-logo">Nayyab<span>.</span></a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact" class="nav-cta">Connect</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <div class="hero-badge">Open to Internship &amp; Collaborations</div>
+      <h1>
+        Nayyab<br/>
+        <span class="last">Gul</span>
+      </h1>
+      <p class="hero-role">Web &amp; Android Developer · CS Student</p>
+      <p class="hero-desc">
+        A passionate Computer Science student from Kahuta, building real-world
+        web and Android applications. I love turning ideas into functional,
+        beautiful digital products.
+      </p>
+      <div class="hero-info">
+        <span>📍 <strong>Kahuta, Punjab, Pakistan</strong></span>
+        <span>🎓 <strong>KICSIT — 1st Sub Campus</strong></span>
+        <span>💼 <strong>Available for Internship</strong></span>
+      </div>
+      <div class="hero-btns">
+        <a href="#projects" class="btn-primary">View My Projects</a>
+        <a href="#contact" class="btn-outline">Connect With Me</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="avatar-wrap">
+        <div class="avatar-ring2"></div>
+        <div class="avatar-ring1"></div>
+        <div class="avatar-circle">NG</div>
+        <div class="avatar-dot"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-num">4<span>+</span></span>
+      <span class="stat-label">Projects Built</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">2<span>+</span></span>
+      <span class="stat-label">Platforms (Web &amp; Android)</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">7<span>+</span></span>
+      <span class="stat-label">Languages &amp; Tools</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">1<span>st</span></span>
+      <span class="stat-label">Sub Campus — KICSIT</span>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="about-wrap" id="about">
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="section-eyebrow">About Me</p>
+        <h2 class="section-title">Passionate about<br/><em>building</em> real things</h2>
+        <p>
+          Hi! I'm <strong>Nayyab Gul</strong>, a Computer Science student at KICSIT
+          (1st Sub Campus), Kahuta. I am a fresher who is deeply passionate about
+          coding and creating applications that solve real-world problems.
+        </p>
+        <p>
+          I have hands-on project experience in both <strong>Android development</strong>
+          (Java &amp; Kotlin with Firebase) and <strong>Web development</strong>
+          (HTML, CSS, JavaScript, Python Django, MongoDB).
+        </p>
+        <p>
+          I am always eager to learn new technologies and take on new challenges.
+          Currently looking for <strong>internship opportunities</strong> to grow
+          my skills in a professional environment.
+        </p>
+      </div>
+      <div class="about-details">
+        <div class="detail-item">
+          <div class="detail-label">Full Name</div>
+          <div class="detail-value">Nayyab Gul</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Location</div>
+          <div class="detail-value">Kahuta, Punjab 🇵🇰</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">University</div>
+          <div class="detail-value">KICSIT — 1st Sub Campus</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Status</div>
+          <div class="detail-value">🟢 Open to Opportunities</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Focus</div>
+          <div class="detail-value">Web &amp; Android Dev</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-label">Degree</div>
+          <div class="detail-value">BS Computer Science</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <section class="section" id="skills">
+    <div class="section-header">
+      <p class="section-eyebrow">What I Know</p>
+      <h2 class="section-title">Skills &amp; <em>Technologies</em></h2>
+    </div>
+    <div class="skills-categories">
+      <div class="skill-category">
+        <div class="skill-cat-icon">🌐</div>
+        <div class="skill-cat-title">Web Development</div>
+        <div class="skill-tags">
+          <span class="skill-tag">HTML5</span>
+          <span class="skill-tag">CSS3</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Django</span>
+          <span class="skill-tag">MongoDB</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-icon">📱</div>
+        <div class="skill-cat-title">Android Development</div>
+        <div class="skill-tags">
+          <span class="skill-tag green">Java</span>
+          <span class="skill-tag green">Kotlin</span>
+          <span class="skill-tag green">Firebase</span>
+          <span class="skill-tag green">Android Studio</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-icon">💻</div>
+        <div class="skill-cat-title">Programming Languages</div>
+        <div class="skill-tags">
+          <span class="skill-tag orange">C</span>
+          <span class="skill-tag orange">C++</span>
+          <span class="skill-tag orange">Python</span>
+          <span class="skill-tag orange">JavaScript</span>
+          <span class="skill-tag orange">Java</span>
+          <span class="skill-tag orange">Kotlin</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-icon">🗄️</div>
+        <div class="skill-cat-title">Databases</div>
+        <div class="skill-tags">
+          <span class="skill-tag purple">MongoDB</span>
+          <span class="skill-tag purple">Firebase</span>
+          <span class="skill-tag purple">SQLite</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-icon">🛠️</div>
+        <div class="skill-cat-title">Tools &amp; Platforms</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">GitHub</span>
+          <span class="skill-tag">VS Code</span>
+          <span class="skill-tag">Android Studio</span>
+          <span class="skill-tag">GitHub Pages</span>
+        </div>
+      </div>
+      <div class="skill-category">
+        <div class="skill-cat-icon">🧠</div>
+        <div class="skill-cat-title">Currently Learning</div>
+        <div class="skill-tags">
+          <span class="skill-tag green">React.js</span>
+          <span class="skill-tag green">REST APIs</span>
+          <span class="skill-tag green">UI/UX Design</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <div class="projects-bg" id="projects">
+    <div class="projects-inner">
+      <div class="section-header">
+        <p class="section-eyebrow">What I've Built</p>
+        <h2 class="section-title">My <em>Projects</em></h2>
+      </div>
+      <div class="projects-grid">
+
+        <div class="project-card wide">
+          <div class="project-thumb thumb-web">
+            🍕
+            <span class="project-platform">Web App</span>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag-item">Featured</span>
+              <span class="project-tag-item">Full Stack</span>
+            </div>
+            <h3 class="project-title">Online Food Order App — Web</h3>
+            <p class="project-desc">
+              A full-stack online food ordering web application where users can browse menus,
+              add items to cart, and place orders. Built with a Python Django backend connected
+              to a MongoDB database, and a responsive HTML/CSS/JavaScript frontend.
+              Features include user authentication, menu management, and order tracking.
+            </p>
+            <div class="project-tech">
+              <span class="tech-pill">HTML</span>
+              <span class="tech-pill">CSS</span>
+              <span class="tech-pill">JavaScript</span>
+              <span class="tech-pill">Python</span>
+              <span class="tech-pill">Django</span>
+              <span class="tech-pill">MongoDB</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-thumb thumb-android">
+            🍔
+            <span class="project-platform">Android</span>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag-item">Android</span>
+              <span class="project-tag-item">Kotlin</span>
+            </div>
+            <h3 class="project-title">Online Food Order App — Android</h3>
+            <p class="project-desc">
+              A native Android food ordering app built with Kotlin. Users can sign up,
+              browse food categories, place orders, and track delivery status in real time.
+              Uses Firebase as the real-time database for storing orders and user data.
+            </p>
+            <div class="project-tech">
+              <span class="tech-pill">Kotlin</span>
+              <span class="tech-pill">Android Studio</span>
+              <span class="tech-pill">Firebase</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-thumb thumb-cpp">
+            📚
+            <span class="project-platform">C++ Console</span>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag-item">C++</span>
+              <span class="project-tag-item">OOP</span>
+            </div>
+            <h3 class="project-title">Online Book Store — Console Based</h3>
+            <p class="project-desc">
+              A C++ console-based bookstore application where users can browse books,
+              search by title or author, add to cart, and complete a purchase.
+              Demonstrates strong OOP concepts, file handling, and data structures.
+            </p>
+            <div class="project-tech">
+              <span class="tech-pill">C++</span>
+              <span class="tech-pill">OOP</span>
+              <span class="tech-pill">File I/O</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-thumb thumb-calc">
+            🧮
+            <span class="project-platform">Android</span>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag-item">Android</span>
+              <span class="project-tag-item">Java</span>
+            </div>
+            <h3 class="project-title">Calculator App — Android</h3>
+            <p class="project-desc">
+              A clean and functional Android calculator app built with Java.
+              Supports all basic arithmetic operations with a user-friendly interface.
+              Demonstrates Android UI design, XML layouts, and Java logic implementation.
+            </p>
+            <div class="project-tech">
+              <span class="tech-pill">Java</span>
+              <span class="tech-pill">Android Studio</span>
+              <span class="tech-pill">XML Layouts</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="contact-wrap" id="contact">
+    <p class="section-eyebrow">Get In Touch</p>
+    <h2>Let's Connect &amp;<br/><em>Work Together</em></h2>
+    <p>I am open to internships, freelance projects, and collaborations. Find me on:</p>
+    <div class="social-btns">
+      <a href="https://github.com/nayyab-gul-code" target="_blank" class="social-btn btn-github">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a href="https://www.linkedin.com/in/nayyab-gul-a153483b3" target="_blank" class="social-btn btn-linkedin">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2025 Nayyab Gul · Kahuta, Pakistan</span>
+    <span>
+      <a href="https://github.com/nayyab-gul-code" target="_blank">GitHub</a>
+      &nbsp;·&nbsp;
+      <a href="https://www.linkedin.com/in/nayyab-gul-a153483b3" target="_blank">LinkedIn</a>
+    </span>
+  </footer>
+
+</body>
+</html>
